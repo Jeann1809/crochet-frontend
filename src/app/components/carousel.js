@@ -8,13 +8,13 @@ export default function Carousel() {
 
     const slides = [
         {
-          color: '#fcd5ce',
+          color: '#f4d58d',
           bigText: 'Cozy Creations ☀️',
           smallText: 'Wrap yourself in handmade love',
           image: '/Sunny.jpeg',
         },
         {
-          color: '#d4a373',
+          color: '#ffb3c6',
           bigText: 'Crafted with Care ❤️',
           smallText: 'Every stitch tells a story',
           image: '/Snoopy.jpeg',

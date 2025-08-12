@@ -3,6 +3,7 @@
 import Navbar from "./components/navbar";
 import Carousel from "./components/carousel";
 import ProductCard from "./components/ProductCard";
+import AboutSection from "./components/AboutSection";
 
 export default function Home() {
   return (
@@ -49,6 +50,7 @@ export default function Home() {
           />
         </div>
       </div>
+      <AboutSection />
     </div>
     
   );

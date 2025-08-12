@@ -22,13 +22,15 @@ export default function ProductCard({
                 <img 
                     src={image} 
                     alt={name}
-                    className={`w-full h-full object-cover transition-transform duration-300 ${
-                        isHovered ? 'scale-110' : 'scale-100'
+                    className={`w-full h-full object-cover transition-all duration-300 ${
+                        isHovered 
+                            ? 'scale-110 opacity-60 blur-sm' 
+                            : 'scale-100 opacity-100 blur-0'
                     }`}
                 />
                 {/* Add to Cart overlay */}
                 {isHovered && (
-                    <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-transparent bg-opacity-10 flex items-center justify-center">
                         <button 
                         onClick={() => onAddToCart && onAddToCart({ name, price, image })}
                         className="bg-custom-mediumBlue text-white py-2 px-3 rounded-lg font-semibold hover:bg-custom-navyBlue transition-colors text-sm"
@@ -63,7 +65,7 @@ export default function ProductCard({
                 {/* Action Buttons */}
                 <div className="flex gap-2">
                     <button className="flex-1 bg-custom-lightBlue text-white py-2 px-4 rounded-lg font-semibold hover:bg-custom-mediumBlue transition-colors">
-                        Buy Now
+                        Place Order
                     </button>
                 </div>
             </div>
