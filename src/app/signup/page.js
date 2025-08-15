@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { registerUser } from '../services/users';
 import Step1PersonalInfo from './components/Step1PersonalInfo';
 import Step2ContactInfo from './components/Step2ContactInfo';
 import Step3AddressInfo from './components/Step3AddressInfo';
@@ -10,6 +12,7 @@ import Step5Review from './components/Step5Review';
 import ProductBubblesBackground from '../components/ProductBubblesBackground';
 
 export default function SignupPage() {
+    const router = useRouter();
     const [currentStep, setCurrentStep] = useState(1);
     const [validationAttempted, setValidationAttempted] = useState({
         step1: false,
@@ -19,14 +22,21 @@ export default function SignupPage() {
     });
     const [formData, setFormData] = useState({
         email: '',
-        firstName: '',
-        lastName: '',
-        address: '',
+        name: '',
+        shippingAddress: {
+            street: '',
+            city: '',
+            zip: '',
+            country: ''
+        },
         phone: '',
         role: 'customer',
         password: '',
         confirmPassword: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+    const [submitSuccess, setSubmitSuccess] = useState('');
 
     const totalSteps = 5;
 
@@ -48,8 +58,8 @@ export default function SignupPage() {
     const validateCurrentStep = () => {
         switch (currentStep) {
             case 1:
-                if (!formData.firstName.trim() || !formData.lastName.trim()) {
-                    alert('Please fill in both First Name and Last Name fields.');
+                if (!formData.name.trim()) {
+                    alert('Please fill in your name.');
                     return false;
                 }
                 break;
@@ -66,8 +76,11 @@ export default function SignupPage() {
                 }
                 break;
             case 3:
-                if (!formData.address.trim()) {
-                    alert('Please enter your address.');
+                if (!formData.shippingAddress.street.trim() || 
+                    !formData.shippingAddress.city.trim() || 
+                    !formData.shippingAddress.zip.trim() || 
+                    !formData.shippingAddress.country.trim()) {
+                    alert('Please fill in all address fields.');
                     return false;
                 }
                 break;
@@ -99,6 +112,59 @@ export default function SignupPage() {
         }
     };
 
+    const handleFinalSubmit = async () => {
+        // Mark all steps as validation attempted
+        setValidationAttempted({
+            step1: true,
+            step2: true,
+            step3: true,
+            step4: true
+        });
+
+        // Validate all fields before submission
+        if (!validateAllFields()) {
+            return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitError('');
+        setSubmitSuccess('');
+
+        try {
+            const result = await registerUser(formData);
+            
+            console.log('Registration successful:', result);
+            setSubmitSuccess('Account created successfully! Redirecting to login...');
+            
+            // Clear form data
+            setFormData({
+                email: '',
+                name: '',
+                shippingAddress: {
+                    street: '',
+                    city: '',
+                    zip: '',
+                    country: ''
+                },
+                phone: '',
+                role: 'customer',
+                password: '',
+                confirmPassword: ''
+            });
+            
+            // Redirect to login page after a short delay
+            setTimeout(() => {
+                router.push('/login');
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Registration failed:', error);
+            setSubmitError(error.message || 'Registration failed. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     const updateFormData = (newData) => {
         setFormData(prev => ({
             ...prev,
@@ -120,20 +186,19 @@ export default function SignupPage() {
 
     const validateAllFields = () => {
         // Check all required fields
-        if (!formData.firstName.trim()) {
-            alert('Please fill in your First Name.');
-            return false;
-        }
-        if (!formData.lastName.trim()) {
-            alert('Please fill in your Last Name.');
+        if (!formData.name.trim()) {
+            alert('Please fill in your name.');
             return false;
         }
         if (!formData.email.trim()) {
             alert('Please enter your email address.');
             return false;
         }
-        if (!formData.address.trim()) {
-            alert('Please enter your address.');
+        if (!formData.shippingAddress.street.trim() || 
+            !formData.shippingAddress.city.trim() || 
+            !formData.shippingAddress.zip.trim() || 
+            !formData.shippingAddress.country.trim()) {
+            alert('Please fill in all address fields.');
             return false;
         }
         if (!formData.password) {
@@ -163,7 +228,7 @@ export default function SignupPage() {
             case 4:
                 return <Step4PasswordInfo formData={formData} updateFormData={updateFormData} validationAttempted={validationAttempted.step4} />;
             case 5:
-                return <Step5Review formData={formData} />;
+                return null; // Step5Review is handled separately with props
             default:
                 return null;
         }
@@ -222,36 +287,42 @@ export default function SignupPage() {
                 <div className="bg-white rounded-2xl shadow-xl p-8">
                     <form onSubmit={handleSubmit}>
                         {renderStep()}
+                        {currentStep === 5 && (
+                            <Step5Review 
+                                formData={formData} 
+                                onSubmit={handleFinalSubmit}
+                                isSubmitting={isSubmitting}
+                                submitError={submitError}
+                                submitSuccess={submitSuccess}
+                            />
+                        )}
 
                         {/* Navigation Buttons */}
-                        <div className="flex justify-between mt-8">
-                            {currentStep > 1 && (
-                                <button
-                                    type="button"
-                                    onClick={prevStep}
-                                    className="px-6 py-3 border border-custom-mediumBlue text-custom-mediumBlue rounded-lg hover:bg-custom-mediumBlue hover:text-white transition-all duration-200"
-                                >
-                                    ← Previous
-                                </button>
-                            )}
-                            
-                            {currentStep < totalSteps ? (
-                                <button
-                                    type="button"
-                                    onClick={nextStep}
-                                    className="ml-auto px-6 py-3 bg-custom-mediumBlue text-white rounded-lg hover:bg-custom-navyBlue transition-all duration-200"
-                                >
-                                    Next →
-                                </button>
-                            ) : (
-                                <button
-                                    type="submit"
-                                    className="ml-auto px-6 py-3 bg-custom-mediumBlue text-white rounded-lg hover:bg-custom-navyBlue transition-all duration-200"
-                                >
-                                    Create Account
-                                </button>
-                            )}
-                        </div>
+                        {currentStep < 5 && (
+                            <div className="flex justify-between mt-8">
+                                {currentStep > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={prevStep}
+                                        className="px-6 py-3 border border-custom-mediumBlue text-custom-mediumBlue rounded-lg hover:bg-custom-mediumBlue hover:text-white transition-all duration-200"
+                                    >
+                                        ← Previous
+                                    </button>
+                                    )}
+                                    
+                                    {currentStep < totalSteps ? (
+                                        <button
+                                            type="button"
+                                            onClick={nextStep}
+                                            className="px-6 py-3 bg-custom-mediumBlue text-white rounded-lg hover:bg-custom-navyBlue transition-all duration-200"
+                                        >
+                                            Next →
+                                        </button>
+                                    ) : (
+                                        <div></div> // Empty div for spacing
+                                    )}
+                            </div>
+                        )}
                     </form>
                 </div>
 

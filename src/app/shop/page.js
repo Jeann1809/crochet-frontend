@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import Navbar from '../components/navbar';
+import { getProducts } from '../services/products';
 
 export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,71 +12,112 @@ export default function ShopPage() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Load sample products data
+  // Load products from API
   useEffect(() => {
-    setLoading(true);
-    
-    // Sample products data
-    const sampleProducts = [
-      {
-        id: "frog-001",
-        name: "Crochet Frog",
-        category: "animals",
-        price: 25.99,
-        image: "/Frog.jpeg",
-        description: "Adorable handmade crochet frog with green yarn",
-        inStock: true
-      },
-      {
-        id: "pig-001",
-        name: "Crochet Pig",
-        category: "animals",
-        price: 22.99,
-        image: "/Pig.jpeg",
-        description: "Cute pink crochet pig perfect for decoration",
-        inStock: true
-      },
-      {
-        id: "snoopy-001",
-        name: "Crochet Snoopy",
-        category: "characters",
-        price: 28.99,
-        image: "/Snoopy.jpeg",
-        description: "Classic Snoopy character in crochet form",
-        inStock: false
-      },
-      {
-        id: "sunny-001",
-        name: "Crochet Sunny",
-        category: "characters",
-        price: 24.99,
-        image: "/Sunny.jpeg",
-        description: "Bright and cheerful crochet sun character",
-        inStock: true
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+                 const response = await getProducts();
+         const fetchedProducts = response.data;
+         
+         console.log('API Response:', fetchedProducts);
+         
+                   // Transform API response to match expected format
+          const transformedProducts = fetchedProducts.map(product => ({
+            id: product._id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            category: product.categories && product.categories.length > 0 ? product.categories[0] : 'uncategorized',
+            image: product.image,
+            inStock: product.stock > 0,
+            stock: product.stock // Keep original stock value for display
+          }));
+         
+         console.log('Transformed Products:', transformedProducts);
+         
+         setProducts(transformedProducts);
+         
+         // Extract unique categories from fetched products
+         const uniqueCategories = [...new Set(transformedProducts.map(product => product.category).filter(Boolean))];
+         const categoryOptions = [
+           { value: 'all', label: 'All Products' },
+           ...uniqueCategories.map(category => ({
+             value: category,
+             label: category && typeof category === 'string' ? category.charAt(0).toUpperCase() + category.slice(1) : category
+           }))
+         ];
+        
+        setCategories(categoryOptions);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        setError('Failed to load products. Please try again later.');
+        // Fallback to sample data if API fails
+        const sampleProducts = [
+          {
+            id: "frog-001",
+            name: "Crochet Frog",
+            category: "animals",
+            price: 25.99,
+            image: "/Frog.jpeg",
+            description: "Adorable handmade crochet frog with green yarn",
+            inStock: true
+          },
+          {
+            id: "pig-001",
+            name: "Crochet Pig",
+            category: "animals",
+            price: 22.99,
+            image: "/Pig.jpeg",
+            description: "Cute pink crochet pig perfect for decoration",
+            inStock: true
+          },
+          {
+            id: "snoopy-001",
+            name: "Crochet Snoopy",
+            category: "characters",
+            price: 28.99,
+            image: "/Snoopy.jpeg",
+            description: "Classic Snoopy character in crochet form",
+            inStock: false
+          },
+          {
+            id: "sunny-001",
+            name: "Crochet Sunny",
+            category: "characters",
+            price: 24.99,
+            image: "/Sunny.jpeg",
+            description: "Bright and cheerful crochet sun character",
+            inStock: true
+          }
+        ];
+        
+        setProducts(sampleProducts);
+        setCategories([
+          { value: 'all', label: 'All Products' },
+          { value: 'animals', label: 'Animals' },
+          { value: 'characters', label: 'Characters' }
+        ]);
+      } finally {
+        setLoading(false);
       }
-    ];
-    
-    setProducts(sampleProducts);
-    
-    // Set categories
-    setCategories([
-      { value: 'all', label: 'All Products' },
-      { value: 'animals', label: 'Animals' },
-      { value: 'characters', label: 'Characters' }
-    ]);
-    
-    setLoading(false);
+    };
+
+    fetchProducts();
   }, []);
 
-  // Filter and sort products
-  const filteredProducts = products
-    .filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           product.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    })
+     // Filter and sort products
+   const filteredProducts = products
+     .filter(product => {
+       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            product.description.toLowerCase().includes(searchTerm.toLowerCase());
+       const matchesCategory = selectedCategory === 'all' || (product.category && product.category === selectedCategory);
+       return matchesSearch && matchesCategory;
+     })
     .sort((a, b) => {
       switch (sortBy) {
         case 'price-low':
@@ -187,6 +229,18 @@ export default function ShopPage() {
             </button>
           )}
         </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <div className="flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              <span>{error}</span>
+            </div>
+          </div>
+        )}
 
         {/* Products Grid */}
         {loading ? (

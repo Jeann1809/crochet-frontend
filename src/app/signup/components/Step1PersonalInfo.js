@@ -15,53 +15,27 @@ export default function Step1PersonalInfo({ formData, updateFormData, validation
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* First Name */}
-                <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-custom-darkBlue mb-2">
-                        First Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        required
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-custom-mediumBlue focus:border-transparent transition-all duration-200 text-custom-darkBlue placeholder-custom-mediumBlue ${
-                            validationAttempted && formData.firstName.trim() === '' ? 'border-red-300 focus:ring-red-500' : 'border-custom-lightGray focus:ring-custom-mediumBlue'
-                        }`}
-                        placeholder="Enter your first name"
-                    />
-                    {validationAttempted && formData.firstName.trim() === '' && (
-                        <p className="text-red-500 text-sm mt-1">First name is required</p>
-                    )}
-                </div>
-
-                {/* Last Name */}
-                <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-custom-darkBlue mb-2">
-                        Last Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        required
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-custom-mediumBlue focus:border-transparent transition-all duration-200 text-custom-darkBlue placeholder-custom-mediumBlue ${
-                            validationAttempted && formData.lastName.trim() === '' ? 'border-red-300 focus:ring-red-500' : 'border-custom-lightGray focus:ring-custom-mediumBlue'
-                        }`}
-                        placeholder="Enter your last name"
-                    />
-                    {validationAttempted && formData.lastName.trim() === '' && (
-                        <p className="text-red-500 text-sm mt-1">Last name is required</p>
-                    )}
-                </div>
+            {/* Name Input - Full Width */}
+            <div>
+                <label htmlFor="name" className="block text-sm font-medium text-custom-darkBlue mb-2">
+                    Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={formData.name || ''}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-custom-mediumBlue focus:border-transparent transition-all duration-200 text-custom-darkBlue placeholder-custom-mediumBlue ${
+                        validationAttempted && (!formData.name || formData.name.trim() === '') ? 'border-red-300 focus:ring-red-500' : 'border-custom-lightGray focus:ring-custom-mediumBlue'
+                    }`}
+                    placeholder="Enter your full name"
+                />
+                {validationAttempted && (!formData.name || formData.name.trim() === '') && (
+                    <p className="text-red-500 text-sm mt-1">Name is required</p>
+                )}
             </div>
-
-
         </div>
     );
 }
