@@ -1,9 +1,11 @@
 "use client";
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Carousel() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isTextAnimating, setIsTextAnimating] = useState(false);
+    const router = useRouter();
 
 
     const slides = [
@@ -61,9 +63,23 @@ export default function Carousel() {
                                 {/* Text side - Mobile: top, Desktop: left */}
                                 <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8" style={{ backgroundColor: slide.color }}>
                                     <div className={`text-center text-white transition-all duration-300 ${isTextAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                                        <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-4">{slide.bigText}</h2>
-                                        <p className="text-sm md:text-lg opacity-90">{slide.smallText}</p>
-                                        <button className="mt-4 md:mt-6 bg-white text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base">
+                                    <h1 className="text-6xl font-bold text-white mb-4" style={{
+                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
+                                        textShadow: '3px 3px 0px #1e40af, 6px 6px 0px #1e3a8a',
+                                        transform: 'rotate(1deg)',
+                                        display: 'inline-block'
+                                    }}>
+                                        {slide.bigText}
+                                    </h1>
+                                    <p className="text-2xl text-custom-darkBlue font-semibold" style={{
+                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive"
+                                    }}>
+                                        {slide.smallText}
+                                    </p>
+                                        <button 
+                                            onClick={() => router.push('/shop')}
+                                            className="mt-4 md:mt-6 bg-white text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                                        >
                                             Shop Now
                                         </button>
                                     </div>
@@ -82,9 +98,23 @@ export default function Carousel() {
                                 {/* Text side - Mobile: bottom, Desktop: right */}
                                 <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8" style={{ backgroundColor: slide.color }}>
                                     <div className={`text-center text-white transition-all duration-300 ${isTextAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                                        <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-4">{slide.bigText}</h2>
-                                        <p className="text-sm md:text-lg opacity-90">{slide.smallText}</p>
-                                        <button className="mt-4 md:mt-6 bg-white text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base">
+                                    <h1 className="text-6xl font-bold text-white mb-4" style={{
+                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
+                                        textShadow: '3px 3px 0px #1e40af, 6px 6px 0px #1e3a8a',
+                                        transform: 'rotate(1deg)',
+                                        display: 'inline-block'
+                                    }}>
+                                        {slide.bigText}
+                                    </h1>
+                                    <p className="text-2xl text-custom-darkBlue font-semibold" style={{
+                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive"
+                                    }}>
+                                        {slide.smallText}
+                                    </p>
+                                        <button 
+                                            onClick={() => router.push('/shop')}
+                                            className="mt-4 md:mt-6 bg-white text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                                        >
                                             Shop Now
                                         </button>
                                     </div>

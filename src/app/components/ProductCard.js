@@ -1,15 +1,12 @@
 "use client";
 
 import { useState } from 'react';
+import { useCart } from '../context/CartContext';
 
-export default function ProductCard({ 
-    name, 
-    price, 
-    image, 
-    description = "Beautiful handmade creation",
-    onAddToCart 
-}) {
+export default function ProductCard({ product }) {
+    const { name, price, image, description = "Beautiful handmade creation" } = product;
     const [isHovered, setIsHovered] = useState(false);
+    const { addToCart } = useCart();
 
     return (
         <div 
@@ -28,15 +25,18 @@ export default function ProductCard({
                             : 'scale-100 opacity-100 blur-0'
                     }`}
                 />
+                
                 {/* Add to Cart overlay */}
                 {isHovered && (
-                    <div className="absolute inset-0 bg-transparent bg-opacity-10 flex items-center justify-center">
-                        <button 
-                        onClick={() => onAddToCart && onAddToCart({ name, price, image })}
-                        className="bg-custom-mediumBlue text-white py-2 px-3 rounded-lg font-semibold hover:bg-custom-navyBlue transition-colors text-sm"
-                    >
-                        Add to Cart
-                    </button>
+                    <div className="absolute inset-0 bg-opacity-10 flex items-center justify-center">
+                                                                <button 
+                                            onClick={() => {
+                                                addToCart({ id: product.id || Math.random().toString(36).substr(2, 9), name, price, image, description });
+                                            }}
+                                            className="bg-custom-mediumBlue text-white py-2 px-4 rounded-lg font-semibold hover:bg-custom-navyBlue transition-colors text-sm"
+                                        >
+                                            Add to Cart
+                                        </button>
                     </div>
                 )}
             </div>
