@@ -178,3 +178,57 @@ export async function deleteUser(id) {
     throw error;
   }
 }
+
+export async function getAllUsers() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found");
+  }
+  try {
+    const response = await api.get('/users', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Get all users failed:", error);
+    throw error;
+  }
+}
+
+export async function createUser(userData) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found");
+  }
+  try {
+    const response = await api.post('/users', userData, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Create user failed:", error);
+    throw error;
+  }
+}
+
+export async function updateUserById(id, userData) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found");
+  }
+  try {
+    const response = await api.put(`/users/${id}`, userData, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Update user failed:", error);
+    throw error;
+  }
+}

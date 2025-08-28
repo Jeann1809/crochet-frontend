@@ -280,12 +280,7 @@ export default function ProfilePage() {
             <div className="relative z-10 max-w-2xl mx-auto px-4 pb-8 pt-32">
                 {/* Welcome Header */}
                 <div className="text-center mb-8">
-                    <h1 className="text-6xl font-bold text-white mb-4" style={{
-                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
-                        textShadow: '3px 3px 0px #1e40af, 6px 6px 0px #1e3a8a',
-                        transform: 'rotate(1deg)',
-                        display: 'inline-block'
-                    }}>
+                    <h1 className="text-6xl font-bold text-white mb-4 font-dancing-script">
                         Welcome back, {user?.name || 'User'}!
                     </h1>
                 </div>
@@ -295,7 +290,7 @@ export default function ProfilePage() {
                     <div className="flex space-x-1 mb-6">
                         <button
                             onClick={() => setActiveTab('profile')}
-                            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                            className={`px-6 py-3 rounded-lg font-medium transition-colors font-quicksand ${
                                 activeTab === 'profile'
                                     ? 'bg-custom-mediumBlue text-white'
                                     : 'text-custom-darkBlue hover:bg-gray-100'
@@ -305,7 +300,7 @@ export default function ProfilePage() {
                         </button>
                         <button
                             onClick={() => setActiveTab('orders')}
-                            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                            className={`px-6 py-3 rounded-lg font-medium transition-colors font-quicksand ${
                                 activeTab === 'orders'
                                     ? 'bg-custom-mediumBlue text-white'
                                     : 'text-custom-darkBlue hover:bg-gray-100'
@@ -319,11 +314,11 @@ export default function ProfilePage() {
                     {activeTab === 'profile' && (
                         <div className="space-y-6">
                             <div className="flex justify-between items-center">
-                                <h2 className="text-2xl font-semibold text-custom-darkBlue">Personal Information</h2>
+                                <h2 className="text-2xl font-semibold text-custom-darkBlue font-quicksand">Personal Information</h2>
                                 {!isEditing && (
                                     <button
                                         onClick={handleEditProfile}
-                                        className="px-4 py-2 bg-custom-mediumBlue hover:bg-custom-navyBlue text-white rounded-lg transition-colors"
+                                        className="px-4 py-2 bg-custom-mediumBlue hover:bg-custom-navyBlue text-white rounded-lg transition-colors font-quicksand"
                                     >
                                         Edit Profile
                                     </button>
@@ -355,9 +350,9 @@ export default function ProfilePage() {
                             
                             {isEditing ? (
                                 /* Edit Mode */
-                                <div className="space-y-6">
+                                <div className="space-y-6 font-inter">
                                     <div>
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">
                                             Name <span className="text-red-500">*</span>
                                         </label>
                                         <input
@@ -371,7 +366,7 @@ export default function ProfilePage() {
                                     </div>
                                     
                                     <div>
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">
                                             Phone
                                         </label>
                                         <input
@@ -385,12 +380,12 @@ export default function ProfilePage() {
                                     </div>
                                     
                                     <div className="space-y-4">
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-quicksand">
                                             Address Information
                                         </label>
                                         
                                         <div>
-                                            <label className="block text-xs font-medium text-custom-mediumBlue mb-1">
+                                            <label className="block text-xs font-medium text-custom-mediumBlue mb-1 font-inter">
                                                 Street Address
                                             </label>
                                             <input
@@ -405,7 +400,7 @@ export default function ProfilePage() {
                                         
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
-                                                <label className="block text-xs font-medium text-custom-mediumBlue mb-1">
+                                                <label className="block text-xs font-medium text-custom-mediumBlue mb-1 font-inter">
                                                     City
                                                 </label>
                                                 <input
@@ -419,7 +414,7 @@ export default function ProfilePage() {
                                             </div>
                                         
                                             <div>
-                                                <label className="block text-xs font-medium text-custom-mediumBlue mb-1">
+                                                <label className="block text-xs font-medium text-custom-mediumBlue mb-1 font-inter">
                                                     ZIP/Postal Code
                                                 </label>
                                                 <input
@@ -434,7 +429,7 @@ export default function ProfilePage() {
                                         </div>
                                         
                                         <div>
-                                            <label className="block text-xs font-medium text-custom-mediumBlue mb-1">
+                                            <label className="block text-xs font-medium text-custom-mediumBlue mb-1 font-inter">
                                                 Country
                                             </label>
                                             <select
@@ -468,7 +463,7 @@ export default function ProfilePage() {
                                         <button
                                             onClick={handleUpdateProfile}
                                             disabled={isUpdating}
-                                            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                                            className={`px-6 py-3 rounded-lg font-medium transition-colors font-quicksand ${
                                                 isUpdating
                                                     ? 'bg-gray-400 cursor-not-allowed'
                                                     : 'bg-green-500 hover:bg-green-600 text-white'
@@ -479,7 +474,7 @@ export default function ProfilePage() {
                                         <button
                                             onClick={handleCancelEdit}
                                             disabled={isUpdating}
-                                            className="px-6 py-3 border border-custom-mediumBlue text-custom-mediumBlue rounded-lg hover:bg-custom-mediumBlue hover:text-white transition-colors"
+                                            className="px-6 py-3 border border-custom-mediumBlue text-custom-mediumBlue rounded-lg hover:bg-custom-mediumBlue hover:text-white transition-colors font-quicksand"
                                         >
                                             Cancel
                                         </button>
@@ -487,30 +482,30 @@ export default function ProfilePage() {
                                 </div>
                             ) : (
                                 /* View Mode */
-                                <div className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-6 font-inter">
                                     <div>
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">Name</label>
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">Name</label>
                                         <div className="p-3 bg-gray-50 rounded-lg border text-custom-darkBlue">
                                             {user?.name || 'Not provided'}
                                         </div>
                                     </div>
                                     
                                     <div>
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">Email</label>
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">Email</label>
                                         <div className="p-3 bg-gray-50 rounded-lg border text-custom-darkBlue">
                                             {user?.email || 'Not provided'}
                                         </div>
                                     </div>
                                     
                                     <div>
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">Phone</label>
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">Phone</label>
                                         <div className="p-3 bg-gray-50 rounded-lg border text-custom-darkBlue">
                                             {user?.phone || 'Not provided'}
                                         </div>
                                     </div>
                                     
                                     <div>
-                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2">Address</label>
+                                        <label className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">Address</label>
                                         <div className="p-3 bg-gray-50 rounded-lg border text-custom-darkBlue">
                                             {user?.shippingAddress?.street ? (
                                                 <div className="space-y-1">
@@ -531,7 +526,7 @@ export default function ProfilePage() {
                                 <div className="mt-8 pt-6 border-t border-gray-200">
                                     <button
                                         onClick={handleLogout}
-                                        className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors mb-4"
+                                        className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors mb-4 font-quicksand"
                                     >
                                         Logout
                                     </button>
@@ -539,7 +534,7 @@ export default function ProfilePage() {
                                     {/* Delete Account Button */}
                                     <button
                                         onClick={handleDeleteAccount}
-                                        className="w-full bg-gray-400 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300"
+                                        className="w-full bg-gray-400 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 font-quicksand"
                                     >
                                         Delete My Account
                                     </button>
@@ -551,7 +546,7 @@ export default function ProfilePage() {
                     {/* Orders Tab */}
                     {activeTab === 'orders' && (
                         <div className="space-y-6">
-                            <h2 className="text-2xl font-semibold text-custom-darkBlue">Order History</h2>
+                            <h2 className="text-2xl font-semibold text-custom-darkBlue font-quicksand">Order History</h2>
                             
                             {ordersLoading ? (
                                 <div className="text-center py-8">
@@ -560,15 +555,15 @@ export default function ProfilePage() {
                                         <div className="w-4 h-4 bg-custom-mediumBlue rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                                         <div className="w-4 h-4 bg-custom-mediumBlue rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                                     </div>
-                                    <p className="text-custom-darkBlue mt-2">Loading your orders...</p>
+                                    <p className="text-custom-darkBlue mt-2 font-inter">Loading your orders...</p>
                                 </div>
                             ) : orders.length > 0 ? (
-                                <div className="space-y-4">
+                                <div className="space-y-4 font-inter">
                                     {orders.map((order, index) => (
                                         <div key={order._id || index} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                                             <div className="flex justify-between items-start mb-3">
                                                 <div>
-                                                    <h3 className="font-medium text-custom-darkBlue">Order #{order._id?.slice(-8) || 'Unknown'}</h3>
+                                                    <h3 className="font-medium text-custom-darkBlue font-quicksand">Order #{order._id?.slice(-8) || 'Unknown'}</h3>
                                                     <p className="text-sm text-gray-600">
                                                         {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'Date unknown'}
                                                     </p>

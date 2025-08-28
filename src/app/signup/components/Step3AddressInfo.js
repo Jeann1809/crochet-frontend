@@ -136,19 +136,6 @@ export default function Step3AddressInfo({ formData, updateFormData, validationA
                     </p>
                 )}
             </div>
-
-            {/* Address Format Example */}
-            <div className="bg-custom-lightGray bg-opacity-30 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-custom-darkBlue mb-2">
-                    Address Format Example
-                </h3>
-                <div className="text-sm text-custom-mediumBlue space-y-1">
-                    <p><strong>Street:</strong> 123 Main Street, Apt 4B</p>
-                    <p><strong>City:</strong> New York</p>
-                    <p><strong>ZIP:</strong> 10001</p>
-                    <p><strong>Country:</strong> United States</p>
-                </div>
-            </div>
         </div>
     );
 }

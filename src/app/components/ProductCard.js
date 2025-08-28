@@ -21,12 +21,14 @@ export default function ProductCard({ product }) {
 
     return (
         <div 
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 active:scale-95 sm:active:scale-100"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setTimeout(() => setIsHovered(false), 1000)}
         >
-            {/* Product Image */}
-            <div className="relative h-64 overflow-hidden">
+            {/* Product Image - Mobile Optimized */}
+            <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                 <img 
                     src={image} 
                     alt={name}
@@ -37,14 +39,12 @@ export default function ProductCard({ product }) {
                     }`}
                 />
                 
-
-                
-                {/* Add to Cart overlay */}
+                {/* Add to Cart overlay - Mobile Optimized */}
                 {isHovered && inStock && (
-                    <div className="absolute inset-0 bg-opacity-10 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-opacity-20 flex items-center justify-center">
                         <button 
                             onClick={handleAddToCart}
-                            className="bg-custom-mediumBlue text-white py-2 px-4 rounded-lg font-semibold hover:bg-custom-navyBlue transition-colors text-sm"
+                            className="bg-custom-mediumBlue text-white py-2 px-4 rounded-lg font-semibold hover:bg-custom-navyBlue active:bg-custom-navyBlue transition-colors text-sm font-quicksand shadow-lg"
                         >
                             Add to Cart
                         </button>
@@ -52,41 +52,41 @@ export default function ProductCard({ product }) {
                 )}
             </div>
 
-            {/* Product Info */}
-            <div className="p-4">
+            {/* Product Info - Mobile Optimized */}
+            <div className="p-3 sm:p-4">
                 {/* Product Name */}
-                <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-2 line-clamp-2 font-quicksand leading-tight">
                     {name}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-2 font-inter leading-relaxed">
                     {description}
                 </p>
 
-                {/* Price */}
-                <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-bold text-custom-darkBlue">
+                {/* Price - Mobile Optimized */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 space-y-1 sm:space-y-0">
+                    <span className="text-xl sm:text-2xl font-bold text-custom-darkBlue font-quicksand">
                         ${price}
                     </span>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-xs sm:text-sm text-gray-500 font-inter">
                         Shipping not included
                     </span>
                 </div>
                 
-                {/* Action Buttons */}
+                {/* Action Buttons - Mobile Optimized */}
                 <div className="flex gap-2">
                     {inStock ? (
                         <button 
                             onClick={handlePlaceOrder}
-                            className="flex-1 bg-custom-lightBlue text-white py-2 px-4 rounded-lg font-semibold hover:bg-custom-mediumBlue transition-colors"
+                            className="flex-1 bg-custom-lightBlue text-white py-2.5 sm:py-2 px-3 sm:px-4 rounded-lg font-semibold hover:bg-custom-mediumBlue active:bg-custom-mediumBlue transition-colors text-sm font-quicksand shadow-sm active:shadow-md"
                         >
                             Place Order
                         </button>
                     ) : (
                         <button 
                             disabled
-                            className="flex-1 bg-gray-400 text-white py-2 px-4 rounded-lg font-semibold cursor-not-allowed"
+                            className="flex-1 bg-gray-400 text-white py-2.5 sm:py-2 px-3 sm:px-4 rounded-lg font-semibold cursor-not-allowed text-sm"
                         >
                             Out of Stock
                         </button>

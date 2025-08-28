@@ -7,8 +7,6 @@ import ProductCard from "./components/ProductCard";
 import AboutSection from "./components/AboutSection";
 import { getProducts } from "./services/products";
 
-
-
 export default function Home() {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -83,71 +81,70 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="pt-20">
+      
+      {/* Mobile-optimized spacing */}
+      <div className="pt-16 sm:pt-20">
         <Carousel />
       </div>
-      <div className="pt-10 text-center">
-      <h4 className="text-4xl font-bold text-custom-lightBlue mb-4" style={{
-          fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
-          textShadow: '2px 2px 0px #1e40af, 4px 4px 0px #1e3a8a',
-          display: 'inline-block'
-      }}>
+      
+      {/* Trending Section - Mobile First */}
+      <div className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-custom-lightBlue mb-3 sm:mb-4 font-dancing-script leading-tight">
             Trending Treasures
-      </h4>
-      <h4 className="text-xl text-custom-darkBlue font-semibold" style={{
-      fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive"
-      }}>
-           Discover our most popular items
-      </h4>
-      </div>
+          </h1>
+          <h2 className="text-lg sm:text-xl lg:text-2xl text-custom-darkBlue font-semibold font-quicksand px-4">
+            Discover our most popular items
+          </h2>
+        </div>
 
-
-      <div className="pt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Error Display */}
+        {/* Error Display - Mobile Optimized */}
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-            <div className="flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 mx-4 sm:mx-0">
+            <div className="flex items-center justify-center sm:justify-start">
+              <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
-              <span>{error}</span>
+              <span className="font-inter text-sm sm:text-base">{error}</span>
             </div>
           </div>
         )}
 
-        {/* Products Grid */}
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-custom-mediumBlue mx-auto mb-4"></div>
-              <h3 className="text-lg font-medium text-custom-darkBlue mb-2">Loading Trending Products</h3>
-              <p className="text-custom-mediumBlue">Please wait while we load your favorite items...</p>
+        {/* Products Section - Mobile First Grid */}
+        <div className="max-w-7xl mx-auto">
+          {loading ? (
+            <div className="text-center py-8 sm:py-12">
+              <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 mx-4 sm:mx-0">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-custom-mediumBlue mx-auto mb-4"></div>
+                <h3 className="text-lg font-medium text-custom-darkBlue mb-2 font-quicksand">Loading Trending Products</h3>
+                <p className="text-custom-mediumBlue font-inter text-sm sm:text-base">Please wait while we load your favorite items...</p>
+              </div>
             </div>
-          </div>
-        ) : trendingProducts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {trendingProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <svg className="mx-auto h-12 w-12 text-custom-mediumBlue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <h3 className="text-lg font-medium text-custom-darkBlue mb-2">No trending products found</h3>
-              <p className="text-custom-mediumBlue">
-                We couldn't load the trending products at the moment.
-              </p>
+          ) : trendingProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-0">
+              {trendingProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="text-center py-8 sm:py-12">
+              <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 mx-4 sm:mx-0">
+                <svg className="mx-auto h-12 w-12 text-custom-mediumBlue mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <h3 className="text-lg font-medium text-custom-darkBlue mb-2 font-quicksand">No trending products found</h3>
+                <p className="text-custom-mediumBlue font-inter text-sm sm:text-base">
+                  We couldn't load the trending products at the moment.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
+      
       <AboutSection />
     </div>
-    
   );
 }

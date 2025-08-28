@@ -2,29 +2,30 @@ import  api  from './api';
 
 export async function createOrder(orderData) {
   try {
-    // If user is logged in, get their ID from token
-    const token = localStorage.getItem("token");
+    const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
+
     let userId = null;
-    
     if (token) {
       try {
-        // Decode JWT to get user ID (assuming token contains user info)
         const payload = JSON.parse(atob(token.split('.')[1]));
-        userId = payload.id || payload._id;
+        userId = payload.id || payload._id || null;
       } catch (error) {
         console.error("Failed to decode token:", error);
       }
     }
 
-    // Prepare order payload
+    // Backend exposes POST /orders (no guest route). Send minimal payload.
+    const endpoint = '/orders';
+
     const orderPayload = {
-      ...orderData,
-      user: userId || orderData.user || null,
-      email: userId ? "n/a" : orderData.email, // Use provided email if no user ID
-      createdAt: new Date().toISOString()
+      products: orderData.products, // [{ productId, quantity }]
+      total: orderData.total,
+      shippingAddress: orderData.shippingAddress,
+      email: orderData.email || undefined, // guests provide email
+      user: userId || orderData.user || undefined, // logged-in users
     };
 
-    const response = await api.post('/orders', orderPayload);
+    const response = await api.post(endpoint, orderPayload);
     return response.data;
   } catch (error) {
     console.error("Create order failed:", error);
@@ -56,7 +57,6 @@ export async function getOrdersByUser() {
     throw new Error("No token found");
   }
   try {
-    // Decode JWT to get user ID
     const payload = JSON.parse(atob(token.split('.')[1]));
     const userId = payload.id || payload._id;
     

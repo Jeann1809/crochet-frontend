@@ -31,12 +31,12 @@ export const API_CONFIG = {
     },
     
     // Request timeout (in milliseconds)
-    TIMEOUT: 10000,
+    TIMEOUT: 20000,
     
     // Retry configuration
     RETRY: {
         MAX_ATTEMPTS: 3,
-        DELAY: 1000
+        DELAY: 1200
     },
     
     // Headers

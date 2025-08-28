@@ -121,31 +121,26 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-custom-lightBlue to-custom-mediumBlue flex items-center justify-center px-4 relative">
-            <ProductBubblesBackground />
+        <div className="min-h-screen bg-custom-lightBlue md:bg-gradient-to-br md:from-custom-lightBlue md:to-custom-mediumBlue flex items-center justify-center px-4 relative">
+            <div className="hidden md:block">
+                <ProductBubblesBackground />
+            </div>
             <div className="max-w-md w-full space-y-8 relative z-10">
                 {/* Header */}
                 <div className="text-center">
-                <h1 className="text-6xl font-bold text-white mb-4" style={{
-                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
-                                        textShadow: '3px 3px 0px #1e40af, 6px 6px 0px #1e3a8a',
-                                        transform: 'rotate(1deg)',
-                                        display: 'inline-block'
-                                    }}>
-                                        Welcome again!
-                                    </h1>
-                                    <p className="text-2xl text-custom-darkBlue font-semibold" style={{
-                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive"
-                                    }}>
-                                        Sign in to your account
-                                    </p>
+                    <h1 className="text-6xl font-bold text-white mb-4 font-dancing-script">
+                        Welcome again!
+                    </h1>
+                    <p className="text-2xl text-custom-darkBlue font-semibold font-quicksand">
+                        Sign in to your account
+                    </p>
                 </div>
 
                 {/* Login Form */}
-                <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+                <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6 font-inter">
                     {/* Error Message */}
                     {error && (
-                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg font-inter">
                             <div className="flex items-center">
                                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -157,7 +152,7 @@ export default function LoginPage() {
 
                     {/* Success Message */}
                     {success && (
-                        <div className="bg-custom-lightBlue border border-white text-white px-4 py-3 rounded-lg">
+                        <div className="bg-custom-lightBlue border border-white text-white px-4 py-3 rounded-lg font-inter">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -168,7 +163,7 @@ export default function LoginPage() {
                                 {success.includes('already logged in') && (
                                     <Link
                                         href="/profile"
-                                        className="bg-custom-mediumBlue hover:bg-custom-navyBlue text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                                        className="bg-custom-mediumBlue hover:bg-custom-navyBlue text-white px-4 py-2 rounded-lg text-sm transition-colors font-quicksand"
                                     >
                                         Go to Profile
                                     </Link>
@@ -180,7 +175,7 @@ export default function LoginPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Email Field */}
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-custom-darkBlue mb-2">
+                            <label htmlFor="email" className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">
                                 Email Address
                             </label>
                             <input
@@ -200,7 +195,7 @@ export default function LoginPage() {
 
                         {/* Password Field */}
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-custom-darkBlue mb-2">
+                            <label htmlFor="password" className="block text-sm font-medium text-custom-darkBlue mb-2 font-inter">
                                 Password
                             </label>
                             <div className="relative">
@@ -240,7 +235,7 @@ export default function LoginPage() {
                         </div>
 
                         {/* Remember Me & Forgot Password */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between font-inter">
                             <Link
                                 href="/forgot-password"
                                 className="text-sm text-custom-mediumBlue hover:text-custom-navyBlue transition-colors"
@@ -253,7 +248,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className={`w-full font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                            className={`w-full font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform focus:outline-none focus:ring-2 focus:ring-offset-2 font-quicksand ${
                                 isLoading
                                     ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
                                     : 'bg-custom-mediumBlue hover:bg-custom-navyBlue text-white hover:scale-105 focus:ring-custom-mediumBlue'
@@ -275,11 +270,11 @@ export default function LoginPage() {
 
                     {/* Sign Up Link */}
                     <div className="text-center">
-                        <p className="text-custom-darkBlue">
+                        <p className="text-custom-darkBlue font-inter">
                             Don't have an account?{' '}
                             <Link
                                 href="/signup"
-                                className="font-semibold text-custom-mediumBlue hover:text-custom-navyBlue transition-colors"
+                                className="font-semibold text-custom-mediumBlue hover:text-custom-navyBlue transition-colors font-quicksand"
                             >
                                 Sign up
                             </Link>
@@ -291,7 +286,7 @@ export default function LoginPage() {
                 <div className="text-center">
                     <Link
                         href="/"
-                        className="text-custom-darkBlue hover:text-custom-navyBlue transition-colors font-medium"
+                        className="text-custom-darkBlue hover:text-custom-navyBlue transition-colors font-medium font-quicksand"
                     >
                         ← Back to Home
                     </Link>

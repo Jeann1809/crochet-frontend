@@ -7,7 +7,6 @@ export default function Carousel() {
     const [isTextAnimating, setIsTextAnimating] = useState(false);
     const router = useRouter();
 
-
     const slides = [
         {
           color: '#f4d58d',
@@ -49,7 +48,7 @@ export default function Carousel() {
     };
 
     return (
-        <div className="relative w-full h-[calc(100vh-5rem)] overflow-hidden">
+        <div className="relative w-full h-[calc(100vh-5rem)] sm:h-[calc(100vh-5rem)] overflow-hidden">
             <div
                 className="flex h-full transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -61,24 +60,17 @@ export default function Carousel() {
                         {index % 2 === 0 ? (
                             <>
                                 {/* Text side - Mobile: top, Desktop: left */}
-                                <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8" style={{ backgroundColor: slide.color }}>
+                                <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 sm:p-6 md:p-8" style={{ backgroundColor: slide.color }}>
                                     <div className={`text-center text-white transition-all duration-300 ${isTextAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                                    <h1 className="text-6xl font-bold text-white mb-4" style={{
-                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
-                                        textShadow: '3px 3px 0px #1e40af, 6px 6px 0px #1e3a8a',
-                                        transform: 'rotate(1deg)',
-                                        display: 'inline-block'
-                                    }}>
+                                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 sm:mb-4 font-dancing-script leading-tight">
                                         {slide.bigText}
                                     </h1>
-                                    <p className="text-2xl text-custom-darkBlue font-semibold" style={{
-                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive"
-                                    }}>
+                                    <p className="text-lg sm:text-xl md:text-3xl text-custom-darkBlue font-semibold font-quicksand mb-4 sm:mb-6 px-2 sm:px-0">
                                         {slide.smallText}
                                     </p>
                                         <button 
                                             onClick={() => router.push('/shop')}
-                                            className="mt-4 md:mt-6 bg-white text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                                            className="mt-3 sm:mt-4 md:mt-6 bg-white text-gray-800 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 hover:shadow-md hover:scale-95 active:scale-90 transition-all duration-200 ease-in-out text-sm sm:text-base md:text-lg font-quicksand border border-gray-200 shadow-sm active:shadow-md"
                                         >
                                             Shop Now
                                         </button>
@@ -96,24 +88,17 @@ export default function Carousel() {
                                     <img src={slide.image} alt="Product Image" className="w-full h-full object-cover" />
                                 </div>
                                 {/* Text side - Mobile: bottom, Desktop: right */}
-                                <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8" style={{ backgroundColor: slide.color }}>
+                                <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 sm:p-6 md:p-8" style={{ backgroundColor: slide.color }}>
                                     <div className={`text-center text-white transition-all duration-300 ${isTextAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                                    <h1 className="text-6xl font-bold text-white mb-4" style={{
-                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive",
-                                        textShadow: '3px 3px 0px #1e40af, 6px 6px 0px #1e3a8a',
-                                        transform: 'rotate(1deg)',
-                                        display: 'inline-block'
-                                    }}>
+                                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 sm:mb-4 font-dancing-script leading-tight">
                                         {slide.bigText}
                                     </h1>
-                                    <p className="text-2xl text-custom-darkBlue font-semibold" style={{
-                                        fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive"
-                                    }}>
+                                    <p className="text-lg sm:text-xl md:text-3xl text-custom-darkBlue font-semibold font-quicksand mb-4 sm:mb-6 px-2 sm:px-0">
                                         {slide.smallText}
                                     </p>
                                         <button 
                                             onClick={() => router.push('/shop')}
-                                            className="mt-4 md:mt-6 bg-white text-gray-800 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                                            className="mt-3 sm:mt-4 md:mt-6 bg-white text-gray-800 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 hover:shadow-md hover:scale-95 active:scale-90 transition-all duration-200 ease-in-out text-sm sm:text-base md:text-lg font-quicksand border border-gray-200 shadow-sm active:shadow-md"
                                         >
                                             Shop Now
                                         </button>
@@ -125,14 +110,22 @@ export default function Carousel() {
                 ))}
             </div>
 
-            {/* Arrows */}
-            <button onClick={prevSlide} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Arrows - Mobile Optimized */}
+            <button 
+                onClick={prevSlide} 
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 active:bg-opacity-100 text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all active:scale-95"
+                aria-label="Previous slide"
+            >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
-            <button onClick={nextSlide} className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 p-2 rounded-full shadow-lg transition-all">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button 
+                onClick={nextSlide} 
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 active:bg-opacity-100 text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all active:scale-95"
+                aria-label="Next slide"
+            >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
             </button>

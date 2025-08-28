@@ -1,4 +1,14 @@
 @import "tailwindcss";
+/* Local Bellaboo font */
+@font-face {
+  font-family: 'Bellaboo';
+  src: url('/fonts/Bellaboo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bellaboo is loaded via a <link> tag in layout.js */
 
 :root {
   --background: #ffffff;
@@ -8,8 +18,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-quicksand: var(--font-quicksand);
+  --font-inter: var(--font-inter);
+  --font-dancing-script: var(--font-dancing-script);
+  --font-bellaboo: 'Bellaboo', cursive;
   
   /* Your custom colors */
   --color-custom-lightBlue: #81c3d7;
@@ -24,7 +36,63 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Brand logo font */
+.font-bellaboo {
+  font-family: 'Bellaboo', cursive;
+}
+
+/* Bellaboo utility (uses local font CSS variable) */
+.font-bellaboo {
+  font-family: var(--font-bellaboo), cursive;
+}
+
+/* Typography System */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-quicksand), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Default h1 size - can be overridden by Tailwind classes */
+h1:not([class*="text-"]) {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2:not([class*="text-"]) {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3:not([class*="text-"]) {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Special elegant text for brand elements */
+.brand-text {
+  font-family: var(--font-dancing-script), cursive;
+  font-weight: 600;
+}
+
+/* Cute button text */
+.btn-text {
+  font-family: var(--font-quicksand), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Readable body text */
+.body-text {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
 }
 
 /* Custom Loading Animations */

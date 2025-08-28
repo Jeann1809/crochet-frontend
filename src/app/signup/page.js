@@ -152,10 +152,8 @@ export default function SignupPage() {
                 confirmPassword: ''
             });
             
-            // Redirect to login page after a short delay
-            setTimeout(() => {
-                router.push('/login');
-            }, 2000);
+            // Redirect to login page immediately after success
+            router.push('/login');
             
         } catch (error) {
             console.error('Registration failed:', error);
@@ -252,9 +250,11 @@ export default function SignupPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-custom-lightBlue to-custom-mediumBlue flex items-center justify-center px-4 py-8 relative">
-            <ProductBubblesBackground />
-            <div className="max-w-2xl w-full space-y-6 relative z-10">
+        <div className="min-h-screen bg-custom-lightBlue md:bg-gradient-to-br md:from-custom-lightBlue md:to-custom-mediumBlue flex items-center justify-center px-4 py-8 relative">
+            <div className="hidden md:block">
+                <ProductBubblesBackground />
+            </div>
+            <div className="max-w-2xl w-full space-y-10 relative z-10">
                 {/* Header */}
                 <div className="text-center">
                     <h1 className="text-4xl font-bold text-white mb-2">
