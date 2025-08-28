@@ -13,7 +13,7 @@ export async function addProductToCart(userId, productData) {
     });
     return response.data;
   } catch (error) {
-    console.error("Add product to cart failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -31,7 +31,7 @@ export async function getCart(userId) {
     });
     return response.data;
   } catch (error) {
-    console.error("Get cart failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -49,7 +49,7 @@ export async function removeFromCart(userId, productId) {
     });
     return response.data;
   } catch (error) {
-    console.error("Remove from cart failed:", error);
+    // Handle error silently
     throw error;
   }
 }

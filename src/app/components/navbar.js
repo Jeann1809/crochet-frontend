@@ -26,7 +26,7 @@ export default function Navbar() {
                             const userData = userProfile.data || userProfile;
                             setIsAdmin(userData.role === 'admin');
                         } catch (error) {
-                            console.error('Failed to fetch user profile:', error);
+                            // Handle error silently
                             setIsAdmin(false);
                         }
                     } else {

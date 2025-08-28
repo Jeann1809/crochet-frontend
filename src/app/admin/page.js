@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { getUserProfile } from '../services/users';
@@ -33,13 +33,29 @@ export default function AdminDashboard() {
     const [orders, setOrders] = useState([]);
     const [editingOrder, setEditingOrder] = useState(null);
     
-
-
-    useEffect(() => {
-        checkAdminStatus();
+    // Define fetchData first since it's used by checkAdminStatus
+    const fetchData = useCallback(async () => {
+        try {
+            // Fetch products and orders
+            const [productsData, ordersData] = await Promise.all([
+                getProducts(),
+                getAllOrders()
+            ]);
+            
+            setProducts(productsData.data || productsData);
+            
+            // Sort orders by creation date (most recent first)
+            const sortedOrders = (ordersData.data || ordersData).sort((a, b) => 
+                new Date(b.createdAt) - new Date(a.createdAt)
+            );
+            setOrders(sortedOrders);
+        } catch (error) {
+            // Handle error silently
+        }
     }, []);
 
-    const checkAdminStatus = async () => {
+    // Define checkAdminStatus after fetchData since it uses it
+    const checkAdminStatus = useCallback(async () => {
         try {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -59,25 +75,13 @@ export default function AdminDashboard() {
             setIsLoading(false);
             fetchData();
         } catch (error) {
-            console.error('Admin check failed:', error);
             router.push('/login');
         }
-    };
+    }, [router, fetchData]);
 
-    const fetchData = async () => {
-        try {
-            // Fetch products and orders
-            const [productsData, ordersData] = await Promise.all([
-                getProducts(),
-                getAllOrders()
-            ]);
-            
-            setProducts(productsData.data || productsData);
-            setOrders(ordersData.data || ordersData);
-        } catch (error) {
-            console.error('Failed to fetch data:', error);
-        }
-    };
+    useEffect(() => {
+        checkAdminStatus();
+    }, [checkAdminStatus]);
 
     // Product management functions
     const handleProductSubmit = async (e) => {
@@ -93,7 +97,6 @@ export default function AdminDashboard() {
             setProductForm({ name: '', description: '', price: '', category: '', stock: '', image: '' });
             fetchData();
         } catch (error) {
-            console.error('Product operation failed:', error);
             alert('Operation failed: ' + error.message);
         }
     };
@@ -117,7 +120,6 @@ export default function AdminDashboard() {
                 await deleteProduct(id);
                 fetchData();
             } catch (error) {
-                console.error('Delete failed:', error);
                 alert('Delete failed: ' + error.message);
             }
         }
@@ -129,7 +131,6 @@ export default function AdminDashboard() {
             await updateOrder(orderId, { status: newStatus });
             fetchData();
         } catch (error) {
-            console.error('Order update failed:', error);
             alert('Update failed: ' + error.message);
         }
     };
@@ -140,7 +141,6 @@ export default function AdminDashboard() {
                 await deleteOrder(id);
                 fetchData();
             } catch (error) {
-                console.error('Delete failed:', error);
                 alert('Delete failed: ' + error.message);
             }
         }
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
                 {/* Header */}
                 <div className="bg-white rounded-lg shadow-md p-6 mb-8 text-center">
                     <h1 className="text-4xl font-bold text-custom-darkBlue mb-2 font-quicksand">Admin Dashboard</h1>
-                    <p className="text-custom-mediumBlue font-inter">Manage your store's products and orders</p>
+                    <p className="text-custom-mediumBlue font-inter">Manage your store&apos;s products and orders</p>
                 </div>
 
                 {/* Navigation Tabs */}

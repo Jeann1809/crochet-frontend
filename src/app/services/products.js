@@ -24,7 +24,7 @@ export async function createProduct(productData) {
     
     return response.data;
   } catch (error) {
-    console.error("Create product failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -42,7 +42,7 @@ export async function updateProduct(id, productData) {
     });
     return response.data;
   } catch (error) {
-    console.error("Update product failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -60,7 +60,7 @@ export async function deleteProduct(id) {
     });
     return response.data;
   } catch (error) {
-    console.error("Delete product failed:", error);
+    // Handle error silently
     throw error;
   }
 }

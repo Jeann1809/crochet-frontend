@@ -50,7 +50,7 @@ export default function CheckoutPage() {
                 setShippingAddress(userData.shippingAddress);
             }
         } catch (error) {
-            console.error('Failed to fetch user profile:', error);
+            // Handle error silently
         } finally {
             setIsLoading(false);
         }
@@ -98,7 +98,6 @@ export default function CheckoutPage() {
             setOrderSuccess(true);
             clearCart();
         } catch (error) {
-            console.error('Order submission failed:', error);
             alert('Failed to place order. Please try again.');
         } finally {
             setIsSubmitting(false);
@@ -137,7 +136,7 @@ export default function CheckoutPage() {
                                     </li>
                                     <li className="flex items-start">
                                         <span className="text-blue-600 mr-2">•</span>
-                                        We'll provide available payment methods and instructions
+                                        We&apos;ll provide available payment methods and instructions
                                     </li>
                                     <li className="flex items-start">
                                         <span className="text-blue-600 mr-2">•</span>
@@ -155,7 +154,7 @@ export default function CheckoutPage() {
                                     </li>
                                     <li className="flex items-start">
                                         <span className="text-yellow-600 mr-2">•</span>
-                                        If you don't receive an email within 24 hours, please contact our support
+                                        If you don&apos;t receive an email within 24 hours, please contact our support
                                     </li>
                                 </ul>
                             </div>
@@ -347,7 +346,7 @@ export default function CheckoutPage() {
                                         
                                         {/* Guest Options */}
                                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                                            <p className="text-blue-800 mb-3">You're checking out as a guest. Would you like to:</p>
+                                            <p className="text-blue-800 mb-3">You&apos;re checking out as a guest. Would you like to:</p>
                                             <div className="space-y-2">
                                                 <Link
                                                     href="/login"
@@ -379,7 +378,7 @@ export default function CheckoutPage() {
                                                 placeholder="Enter your email address"
                                             />
                                             <p className="text-xs text-custom-mediumBlue mt-1">
-                                                We'll send order confirmation and shipping details to this email
+                                                We&apos;ll send order confirmation and shipping details to this email
                                             </p>
                                         </div>
 

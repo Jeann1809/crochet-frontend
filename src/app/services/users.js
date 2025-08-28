@@ -12,7 +12,7 @@ export async function loginUser(credentials) {
 
     return response.data;
   } catch (error) {
-    console.error("Login failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -34,7 +34,7 @@ export async function getUserProfile() {
     const response = await api.get(`/users/profile/${id}`);
     return response.data;
   } catch (error) {
-    console.error("Fetching profile failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -76,10 +76,10 @@ export async function registerUser(userData) {
     // Make the API call
     const response = await api.post('/users/register', registrationPayload);
     
-    console.log('Registration successful:', response.data);
+
     return response.data;
   } catch (error) {
-    console.error('Registration failed:', error);
+    // Handle error silently
     
     // Handle different types of errors
     if (error.response?.status === 409) {
@@ -109,7 +109,7 @@ export async function updateUser(updatedData) {
     });
     return response.data;
   } catch (error) {
-    console.error("Update failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -131,7 +131,7 @@ export async function updatePass(newPassword) {
     );
     return response.data;
   } catch (error) {
-    console.error("Password update failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -142,7 +142,7 @@ export async function forgotPassword(email) {
     const response = await api.put("/users/forgetpass", { email });
     return response.data;
   } catch (error) {
-    console.error("Forgot password request failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -156,7 +156,7 @@ export async function resetPassword(token, newPassword) {
     });
     return response.data;
   } catch (error) {
-    console.error("Reset password failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -174,7 +174,7 @@ export async function deleteUser(id) {
     });
     return response.data;
   } catch (error) {
-    console.error("Delete user failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -192,7 +192,7 @@ export async function getAllUsers() {
     });
     return response.data;
   } catch (error) {
-    console.error("Get all users failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -210,7 +210,7 @@ export async function createUser(userData) {
     });
     return response.data;
   } catch (error) {
-    console.error("Create user failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -228,7 +228,7 @@ export async function updateUserById(id, userData) {
     });
     return response.data;
   } catch (error) {
-    console.error("Update user failed:", error);
+    // Handle error silently
     throw error;
   }
 }

@@ -33,12 +33,12 @@ export default function LoginPage() {
                     } else {
                         // Token is expired, remove it
                         localStorage.removeItem('token');
-                        console.log('Expired token removed');
+
                     }
                 } catch (error) {
                     // Invalid token format, remove it
                     localStorage.removeItem('token');
-                    console.log('Invalid token removed');
+
                 }
             }
         };
@@ -91,7 +91,7 @@ export default function LoginPage() {
                 password: formData.password
             });
 
-            console.log('Login successful:', result);
+
             
             // Store token in localStorage
             if (result.token) {
@@ -112,7 +112,7 @@ export default function LoginPage() {
                 setError('Login successful but no token received');
             }
         } catch (err) {
-            console.error('Login failed:', err);
+            // Handle error silently
             const errorMessage = err.response?.data?.message || err.message || 'Login failed. Please try again.';
             setError(errorMessage);
         } finally {

@@ -24,7 +24,7 @@ export default function ShopPage() {
                  const response = await getProducts();
          const fetchedProducts = response.data;
          
-         console.log('API Response:', fetchedProducts);
+
          
                    // Transform API response to match expected format
           const transformedProducts = fetchedProducts.map(product => ({
@@ -38,7 +38,7 @@ export default function ShopPage() {
             stock: product.stock // Keep original stock value for display
           }));
          
-         console.log('Transformed Products:', transformedProducts);
+
          
          setProducts(transformedProducts);
          
@@ -54,7 +54,7 @@ export default function ShopPage() {
         
         setCategories(categoryOptions);
       } catch (err) {
-        console.error('Error fetching products:', err);
+        // Handle error silently
         setError('Failed to load products. Please try again later.');
         // Fallback to sample data if API fails
         const sampleProducts = [

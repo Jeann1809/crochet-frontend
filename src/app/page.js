@@ -33,7 +33,7 @@ export default function Home() {
         
         setTrendingProducts(transformedProducts);
       } catch (err) {
-        console.error('Error fetching trending products:', err);
+        // Handle error silently
         setError('Failed to load trending products. Please try again later.');
         // Fallback to sample data if API fails
         const sampleProducts = [

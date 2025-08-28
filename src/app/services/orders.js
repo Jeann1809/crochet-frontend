@@ -10,7 +10,7 @@ export async function createOrder(orderData) {
         const payload = JSON.parse(atob(token.split('.')[1]));
         userId = payload.id || payload._id || null;
       } catch (error) {
-        console.error("Failed to decode token:", error);
+        // Handle error silently
       }
     }
 
@@ -28,7 +28,7 @@ export async function createOrder(orderData) {
     const response = await api.post(endpoint, orderPayload);
     return response.data;
   } catch (error) {
-    console.error("Create order failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -46,7 +46,7 @@ export async function getAllOrders() {
     });
     return response.data;
   } catch (error) {
-    console.error("Get all orders failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -71,7 +71,7 @@ export async function getOrdersByUser() {
     });
     return response.data;
   } catch (error) {
-    console.error("Get orders by user failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -89,7 +89,7 @@ export async function updateOrder(id, orderData) {
     });
     return response.data;
   } catch (error) {
-    console.error("Update order failed:", error);
+    // Handle error silently
     throw error;
   }
 }
@@ -107,7 +107,7 @@ export async function deleteOrder(id) {
     });
     return response.data;
   } catch (error) {
-    console.error("Delete order failed:", error);
+    // Handle error silently
     throw error;
   }
 }

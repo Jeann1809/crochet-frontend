@@ -16,13 +16,13 @@ export default function CartPage() {
 					<div className="bg-white rounded-lg shadow-md p-6 sm:p-8 text-center max-w-md w-full font-inter">
 						<img src="/shopping-cart-svgrepo-com.svg" alt="Shopping Cart" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4" />
 						<h2 className="text-2xl font-bold text-custom-darkBlue mb-2 font-quicksand">Your cart is empty</h2>
-						<p className="text-custom-mediumBlue mb-6 text-sm sm:text-base">Looks like you haven't added any items to your cart yet.</p>
-						<a
+						<p className="text-custom-mediumBlue mb-6 text-sm sm:text-base">Looks like you haven&apos;t added any items to your cart yet.</p>
+						<Link
 							href="/shop"
 							className="inline-block bg-custom-mediumBlue text-white px-5 py-3 rounded-lg font-semibold hover:bg-custom-navyBlue transition-colors font-quicksand"
 						>
 							Start Shopping
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -36,7 +36,7 @@ export default function CartPage() {
 				{/* Playful Title */}
 				<div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8 text-center">
 					<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-custom-lightBlue mb-2 sm:mb-4 font-dancing-script">Shopping Cart</h1>
-					<p className="text-lg sm:text-2xl text-custom-darkBlue font-semibold font-quicksand">Let's see what you've picked!</p>
+					<p className="text-lg sm:text-2xl text-custom-darkBlue font-semibold font-quicksand">Let&apos;s see what you&apos;ve picked!</p>
 				</div>
 
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -133,7 +133,7 @@ export default function CartPage() {
 									<div>
 										<h3 className="text-sm font-semibold text-blue-800 mb-1 font-quicksand">How Our Ordering Works</h3>
 										<p className="text-xs text-blue-700">
-											This website doesn't process payments directly. When you place an order, we'll receive it and send you an email with shipping details and payment instructions.
+											This website doesn&apos;t process payments directly. When you place an order, we&apos;ll receive it and send you an email with shipping details and payment instructions.
 										</p>
 									</div>
 								</div>
@@ -170,12 +170,12 @@ export default function CartPage() {
 							</Link>
 
 							{/* Continue Shopping */}
-							<a
+							<Link
 								href="/shop"
 								className="block text-center text-custom-mediumBlue hover:text-custom-navyBlue transition-colors mt-4 font-medium font-quicksand"
 							>
 								Continue Shopping
-							</a>
+							</Link>
 
 							{/* Checkout Info */}
 							<div className="mt-6 pt-6 border-t border-gray-200">
@@ -187,7 +187,7 @@ export default function CartPage() {
 										<div>
 											<h3 className="text-sm font-semibold text-blue-800 mb-1 font-quicksand">Checkout Options</h3>
 											<p className="text-xs text-blue-700">
-												You can checkout as a guest or login to your account. We'll handle both scenarios seamlessly!
+												You can checkout as a guest or login to your account. We&apos;ll handle both scenarios seamlessly!
 											</p>
 										</div>
 									</div>

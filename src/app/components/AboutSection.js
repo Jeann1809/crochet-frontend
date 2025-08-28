@@ -11,7 +11,7 @@ export default function AboutSection() {
       setPhoneCopied(true);
       setTimeout(() => setPhoneCopied(false), 2000); // Reset after 2 seconds
     } catch (err) {
-      console.error('Failed to copy phone number:', err);
+      // Handle error silently
     }
   };
 

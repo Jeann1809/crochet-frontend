@@ -51,14 +51,14 @@ export default function ProfilePage() {
                         setOrders([]);
                     }
                 } catch (orderError) {
-                    console.error('Failed to load orders:', orderError);
+                    // Handle error silently
                     setOrders([]);
                 } finally {
                     setOrdersLoading(false);
                 }
 
             } catch (error) {
-                console.error('Failed to load profile:', error);
+                // Handle error silently
                 if (error.response?.status === 401) {
                     // Token is invalid, redirect to login
                     localStorage.removeItem('token');
@@ -134,7 +134,7 @@ export default function ProfilePage() {
 
         try {
             const result = await updateUser(editData);
-            console.log('Profile updated successfully:', result);
+
             
             // Update local user state
             setUser(prev => ({
@@ -151,7 +151,7 @@ export default function ProfilePage() {
             }, 3000);
             
         } catch (error) {
-            console.error('Profile update failed:', error);
+            // Handle error silently
             setUpdateError(error.message || 'Failed to update profile. Please try again.');
         } finally {
             setIsUpdating(false);
@@ -186,7 +186,7 @@ export default function ProfilePage() {
             router.push('/');
             
         } catch (error) {
-            console.error('Account deletion failed:', error);
+            // Handle error silently
             setDeleteError(error.message || 'Failed to delete account. Please try again.');
         } finally {
             setIsDeleting(false);

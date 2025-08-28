@@ -21,7 +21,7 @@ export function CartProvider({ children }) {
             try {
                 setCartItems(JSON.parse(savedCart));
             } catch (error) {
-                console.error('Error loading cart from localStorage:', error);
+                // Handle error silently
             }
         }
     }, []);

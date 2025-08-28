@@ -133,7 +133,7 @@ export default function SignupPage() {
         try {
             const result = await registerUser(formData);
             
-            console.log('Registration successful:', result);
+
             setSubmitSuccess('Account created successfully! Redirecting to login...');
             
             // Clear form data
@@ -156,7 +156,7 @@ export default function SignupPage() {
             router.push('/login');
             
         } catch (error) {
-            console.error('Registration failed:', error);
+            // Handle error silently
             setSubmitError(error.message || 'Registration failed. Please try again.');
         } finally {
             setIsSubmitting(false);
@@ -179,7 +179,7 @@ export default function SignupPage() {
         }
         
         // Handle registration logic here
-        console.log('Registration data:', formData);
+
     };
 
     const validateAllFields = () => {
