@@ -136,7 +136,7 @@ export default function Home() {
                 </svg>
                 <h3 className="text-lg font-medium text-custom-darkBlue mb-2 font-quicksand">No trending products found</h3>
                 <p className="text-custom-mediumBlue font-inter text-sm sm:text-base">
-                  We couldn't load the trending products at the moment.
+                  We couldn&apos;t load the trending products at the moment.
                 </p>
               </div>
             </div>

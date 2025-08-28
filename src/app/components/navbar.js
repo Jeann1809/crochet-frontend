@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { getUserProfile } from '../services/users';
 
@@ -62,18 +63,18 @@ export default function Navbar() {
             <div className="flex justify-between items-center h-16 sm:h-20 px-4 sm:px-6 lg:px-8">
                 {/* Logo - Mobile Optimized */}
                 <div className="flex-shrink-0">
-                    <a 
+                    <Link 
                         href="/" 
                         className="text-3xl sm:text-4xl lg:text-5xl font-bold text-custom-darkBlue hover:text-custom-navyBlue transition-colors cursor-pointer font-bellaboo leading-none"
                     >
                         Marimar
-                    </a>
+                    </Link>
                 </div>
                 
                 {/* Navigation elements - Mobile Optimized */}
                 <div className="flex items-center space-x-3 sm:space-x-4 lg:space-x-6">
                     {/* Cart - Mobile Optimized */}
-                    <a
+                    <Link
                         href="/cart"
                         className="text-custom-mediumBlue hover:text-custom-navyBlue transition-colors flex items-center gap-1 sm:gap-2 text-base sm:text-lg font-medium relative font-quicksand p-2 sm:p-1"
                         aria-label="Shopping Cart"
@@ -84,11 +85,11 @@ export default function Navbar() {
                                 {cartCount}
                             </span>
                         )}
-                    </a>
+                    </Link>
                     
                     {/* Admin Link - Mobile Optimized */}
                     {isAdmin && (
-                        <a
+                        <Link
                             href="/admin"
                             className="text-custom-mediumBlue hover:text-custom-navyBlue transition-colors flex items-center gap-1 sm:gap-2 text-base sm:text-lg font-medium font-quicksand p-2 sm:p-1"
                             aria-label="Admin Panel"
@@ -97,17 +98,17 @@ export default function Navbar() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <span className="hidden sm:inline">Admin</span>
-                        </a>
+                        </Link>
                     )}
                     
                     {/* Profile/Login - Mobile Optimized */}
-                    <a
+                    <Link
                         href={isLoggedIn ? "/profile" : "/login"}
                         className="text-custom-mediumBlue hover:text-custom-navyBlue transition-colors flex items-center gap-1 sm:gap-2 text-base sm:text-lg font-medium font-quicksand p-2 sm:p-1"
                         aria-label={isLoggedIn ? "Profile" : "Login"}
                     >
                         <img src="/profile-svgrepo-com.svg" alt={isLoggedIn ? "Profile" : "Login"} className="w-6 h-6 sm:w-8 sm:h-8" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </nav>

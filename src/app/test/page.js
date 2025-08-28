@@ -157,7 +157,34 @@ export default function ServiceTestPage() {
     if (token) {
       setIsLoggedIn(true);
       console.log("useEffect - Calling fetchProfile");
-      fetchProfile();
+      // Define fetchProfile inline to avoid dependency issues
+      const fetchProfileInline = async () => {
+        console.log("fetchProfile - Starting...");
+        clearMessages();
+        try {
+          const profile = await getUserProfile();
+          console.log("fetchProfile - Raw profile result:", profile);
+          
+          // Handle nested data structure
+          const userData = profile.data || profile;
+          console.log("fetchProfile - Processed userData:", userData);
+          
+          setResponse(`Profile fetched successfully! Name: ${userData.name}, Email: ${userData.email}`);
+          console.log("fetchProfile - Setting currentUser to:", userData);
+          setCurrentUser(userData);
+          // Pre-fill update form with current data
+          setUpdateData({
+            name: userData.name || "",
+            email: userData.email || "",
+            phone: userData.phone || "",
+            address: userData.address || ""
+          });
+        } catch (err) {
+          console.error("fetchProfile - Error:", err);
+          setError(`Failed to fetch profile: ${err.response?.data?.message || err.message}`);
+        }
+      };
+      fetchProfileInline();
     } else {
       console.log("useEffect - No token found");
     }
@@ -1597,7 +1624,7 @@ export default function ServiceTestPage() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Test Add Product to Cart Service</h2>
           <p className="text-gray-600 mb-4">
-            Add a product to the current user's cart (requires authentication)
+            Add a product to the current user&apos;s cart (requires authentication)
           </p>
           
           {/* Debug Info */}
@@ -1642,7 +1669,7 @@ export default function ServiceTestPage() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Test Get Cart Service</h2>
           <p className="text-gray-600 mb-4">
-            Retrieve the current user's shopping cart (requires authentication)
+            Retrieve the current user&apos;s shopping cart (requires authentication)
           </p>
           <button
             onClick={handleGetCart}
@@ -1840,7 +1867,7 @@ export default function ServiceTestPage() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Test Get Profile Service</h2>
           <p className="text-gray-600 mb-4">
-            Fetch the current user's profile information
+            Fetch the current user&apos;s profile information
           </p>
           <button
             onClick={fetchProfile}

@@ -11,7 +11,7 @@ export default function Step1PersonalInfo({ formData, updateFormData, validation
                     Tell us about yourself
                 </h2>
                 <p className="text-custom-mediumBlue mt-2">
-                    Let's start with your basic information
+                    Let&apos;s start with your basic information
                 </p>
             </div>
 

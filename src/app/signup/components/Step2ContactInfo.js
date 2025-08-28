@@ -36,7 +36,7 @@ export default function Step2ContactInfo({ formData, updateFormData, validationA
                     <p className="text-red-500 text-sm mt-1">Email address is required</p>
                 ) : (
                     <p className="text-sm text-custom-mediumBlue mt-1">
-                        We'll use this for account verification and communications
+                        We&apos;ll use this for account verification and communications
                     </p>
                 )}
             </div>
@@ -66,7 +66,7 @@ export default function Step2ContactInfo({ formData, updateFormData, validationA
                     Contact Preferences
                 </h3>
                 <p className="text-sm text-custom-mediumBlue">
-                    We'll primarily contact you via email. Phone number is optional and will only be used for important updates.
+                    We&apos;ll primarily contact you via email. Phone number is optional and will only be used for important updates.
                 </p>
             </div>
         </div>
