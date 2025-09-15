@@ -28,12 +28,15 @@ export const metadata = {
     shortcut: '/favicon.svg',
     apple: '/favicon.svg',
   },
+  authors: [{ name: 'Jean Almario' }],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <meta name="author" content="Jean Almario" />
+      </head>
       <body
         className={`${quicksand.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
       >
