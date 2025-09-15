@@ -123,11 +123,28 @@ export default function Home() {
               </div>
             </div>
           ) : trendingProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-0">
-              {trendingProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-0">
+                {trendingProducts.filter((_, index) => [1, 3, 4, 8].includes(index)).map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+              
+              {/* View All Products Button */}
+              {trendingProducts.length > 4 && (
+                <div className="text-center mt-8 sm:mt-12">
+                  <a 
+                    href="/shop"
+                    className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-custom-mediumBlue hover:bg-custom-darkBlue text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-quicksand text-sm sm:text-base"
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    Discover More Treasures
+                  </a>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-8 sm:py-12">
               <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 mx-4 sm:mx-0">
